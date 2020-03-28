@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="9b259c04-2365-4987-9943-7c691ddde02a" name="Default Changelist" comment="" />
+    <list default="true" id="9b259c04-2365-4987-9943-7c691ddde02a" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -9,6 +11,7 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="ROOT_SYNC" value="SYNC" />
     <option name="UPDATE_TYPE" value="REBASE" />
   </component>
   <component name="IgnoredFileRootStore">
@@ -43,9 +46,25 @@
       <option name="presentableId" value="Default" />
       <updated>1585405125257</updated>
     </task>
+    <task id="LOCAL-00001" summary="Initial Commit">
+      <created>1585405832389</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1585405832389</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Initial Commit" />
+    <option name="LAST_COMMIT_MESSAGE" value="Initial Commit" />
+  </component>
   <component name="WindowStateProjectService">
+    <state x="328" y="23" key="CommitChangelistDialog2" timestamp="1585405831944">
+      <screen x="0" y="23" width="1366" height="677" />
+    </state>
+    <state x="328" y="23" key="CommitChangelistDialog2/0.23.1366.677@0.23.1366.677" timestamp="1585405831944" />
     <state x="554" y="262" key="Github.ShareDialog" timestamp="1585405212338">
       <screen x="0" y="23" width="1366" height="677" />
     </state>
@@ -54,6 +73,10 @@
       <screen x="0" y="23" width="1366" height="677" />
     </state>
     <state x="590" y="75" key="Github.UntrackedFilesDialog/0.23.1366.677@0.23.1366.677" timestamp="1585405218619" />
+    <state x="283" y="101" key="Vcs.Push.Dialog.v2" timestamp="1585405977772">
+      <screen x="0" y="23" width="1366" height="677" />
+    </state>
+    <state x="283" y="101" key="Vcs.Push.Dialog.v2/0.23.1366.677@0.23.1366.677" timestamp="1585405977772" />
     <state x="376" y="194" key="com.intellij.ide.util.TipDialog" timestamp="1585405590448">
       <screen x="0" y="23" width="1366" height="677" />
     </state>
