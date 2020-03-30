@@ -72,9 +72,6 @@
               <background color="-2499098"/>
               <model>
                 <item value="all"/>
-                <item value="username1"/>
-                <item value="username2"/>
-                <item value="username3"/>
               </model>
               <selectionMode value="0"/>
             </properties>

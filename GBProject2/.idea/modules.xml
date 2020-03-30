@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/GBProject2.iml" filepath="$PROJECT_DIR$/GBProject2.iml" />
       <module fileurl="file://$PROJECT_DIR$/NetworkClient/NetworkClient.iml" filepath="$PROJECT_DIR$/NetworkClient/NetworkClient.iml" />
+      <module fileurl="file://$PROJECT_DIR$/NetworkClientServer/NetworkClientServer.iml" filepath="$PROJECT_DIR$/NetworkClientServer/NetworkClientServer.iml" />
       <module fileurl="file://$PROJECT_DIR$/NetworkServer/NetworkServer.iml" filepath="$PROJECT_DIR$/NetworkServer/NetworkServer.iml" />
     </modules>
   </component>
