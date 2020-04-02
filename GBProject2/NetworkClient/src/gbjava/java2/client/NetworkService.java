@@ -1,21 +1,26 @@
 package gbjava.java2.client;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
+import java.util.Vector;
 import java.util.function.Consumer;
 
 public class NetworkService {
 
     private final String host;
     private final int port;
+
     private Socket socket;
-    private DataInputStream in;
-    private DataOutputStream out;
+
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
 
     private Consumer<String> messageHandler;
-    private AuthEvent successfulAuthEvent;
+    private Consumer<Vector<String>> updateUsersListMessageHandler;
+    private Consumer<String> errorMessageHandler;
+    private Consumer<String> authMessageHandler;
+    private Consumer<String> endMessageHandler;
+
     private String nickname;
 
     public NetworkService(String host, int port) {
@@ -25,8 +30,8 @@ public class NetworkService {
 
     public void connect() throws IOException {
         socket = new Socket(host, port);
-        in = new DataInputStream(socket.getInputStream());
-        out = new DataOutputStream(socket.getOutputStream());
+        out = new ObjectOutputStream(socket.getOutputStream());
+        in = new ObjectInputStream(socket.getInputStream());
         runReadThread();
     }
 
@@ -34,17 +39,34 @@ public class NetworkService {
         new Thread(() -> {
             while (true) {
                 try {
-                    String message = readMessage();
-                    if (message.startsWith("/auth")) {
-                        String[] messageParts = message.split("\\s+", 2);
-                        nickname = messageParts[1];
-                        successfulAuthEvent.authIsSuccessful(nickname);
-                    }
-                    else if (messageHandler != null) {
-                        messageHandler.accept(message);
+                    Command command = readCommand();
+                    if(command != null) {
+                        switch (command.getType()) {
+                            case AUTH:
+                                AuthCommand aCommand = (AuthCommand) command.getData();
+                                authMessageHandler.accept(aCommand.getUsername());
+                                break;
+                            case MESSAGE:
+                                if (messageHandler != null) {
+                                    MessageCommand mCommand = (MessageCommand) command.getData();
+                                    messageHandler.accept(String.format("%s: %s", mCommand.getFromUser(), mCommand.getMessage()));
+                                }
+                                break;
+                            case ERROR:
+                                ErrorCommand errorCommand = (ErrorCommand) command.getData();
+                                errorMessageHandler.accept(errorCommand.getError());
+                                break;
+                            case UPDATE_USERS_LIST:
+                                UpdateUsersListCommand uCommand = (UpdateUsersListCommand) command.getData();
+                                updateUsersListMessageHandler.accept(uCommand.getUsers());
+                                break;
+                            case END:
+                                endMessageHandler.accept(null);
+                                return;
+                        }
                     }
                 } catch (IOException e) {
-                    System.out.println("Ошибка: Поток чтения был прерван!");
+                    System.err.println("Failed to establish server connection");
                     return;
                 }
             }
@@ -52,37 +74,54 @@ public class NetworkService {
     }
 
     public void sendAuthMessage(String login, String password) throws IOException {
-        sendMessage(String.format("/auth %s %s", login, password));
+        sendCommand(Command.authCommand(login, password));
     }
 
-    public void sendPersonalMessage(String username, String message) throws IOException {
-        sendMessage(String.format("/w %s %s", username, message));
+    public void sendMessage(String username, String message) throws IOException {
+        sendCommand(Command.messageCommand(username, message));
     }
 
-    public void sendMessage(String message) throws IOException {
-        out.writeUTF(message);
-        System.out.printf("Send: %s%n", message);
+    private void sendCommand(Command command) throws IOException {
+        out.writeObject(command);
+        System.out.printf("Send: %s%n", command);
     }
 
-    public String readMessage() throws IOException {
-        String message = in.readUTF();
-        System.out.printf("Read: %s%n", message);
-        return message;
+    private Command readCommand() throws IOException {
+        try {
+            Command command = (Command) in.readObject();
+            System.out.printf("Read: %s%n", command);
+            return command;
+        } catch (ClassNotFoundException e) {
+            return null;
+        }
     }
 
     public void setMessageHandler(Consumer<String> messageHandler) {
         this.messageHandler = messageHandler;
     }
 
-    public void setSuccessfulAuthEvent(AuthEvent successfulAuthEvent) {
-        this.successfulAuthEvent = successfulAuthEvent;
+    public void setUpdateUsersListMessageHandler(Consumer<Vector<String>> updateUsersListMessageHandler) {
+        this.updateUsersListMessageHandler = updateUsersListMessageHandler;
     }
 
-    public void close() {
+    public void setErrorMessageHandler(Consumer<String> errorMessageHandler) {
+        this.errorMessageHandler = errorMessageHandler;
+    }
+
+    public void setAuthMessageHandler(Consumer<String> authMessageHandler) {
+        this.authMessageHandler = authMessageHandler;
+    }
+
+    public void setEndMessageHandler(Consumer<String> endMessageHandler) {
+        this.endMessageHandler = endMessageHandler;
+    }
+
+    public void closeConnection() {
         try {
+            sendCommand(Command.endCommand());
             socket.close();
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Server connection closed");
         }
     }
 }

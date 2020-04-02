@@ -16,21 +16,22 @@ public class AuthDialog extends JFrame {
 
     public AuthDialog(ClientController controller) {
         this.controller = controller;
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setContentPane(contentPane);
         getRootPane().setDefaultButton(buttonOK);
         setSize(400, 250);
         setLocationRelativeTo(null);
-
-        buttonOK.addActionListener(e -> onOK());
-
-        buttonCancel.addActionListener(e -> onCancel());
-
-        setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                onCancel();
+                onClose();
             }
         });
+        addListeners();
+    }
+
+    private void addListeners() {
+        buttonOK.addActionListener(e -> onOK());
+        buttonCancel.addActionListener(e -> onClose());
     }
 
     private void onOK() {
@@ -39,15 +40,17 @@ public class AuthDialog extends JFrame {
         try {
             controller.sendAuthMessage(login, pass);
         } catch (IOException e) {
-            showError("Ошибка при попытки аутентификации");
+            showError("Ошибка при попытке аутентификации!");
         }
     }
 
-    private void onCancel() {
-        System.exit(0);
+    public void onClose() {
+        this.dispose();
+        controller.shutdown();
     }
 
     public void showError(String message) {
         JOptionPane.showMessageDialog(this, message);
     }
+
 }

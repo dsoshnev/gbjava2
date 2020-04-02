@@ -3,6 +3,8 @@ package gbjava.java2.client;
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.IOException;
+import java.util.Vector;
 
 public class ClientChat extends JFrame {
 
@@ -23,7 +25,7 @@ public class ClientChat extends JFrame {
         addListeners();
         addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
-                controller.shutdown();
+                onClose();
             }
         });
     }
@@ -34,16 +36,20 @@ public class ClientChat extends JFrame {
     }
 
     private void sendMessage() {
-        String message = messageTextField.getText().trim();
-        if (!message.isEmpty()) {
-            appendOwnMessage(message);
-            String  username = usersList.getSelectedValue();
-            if(username == null || username.equals("all")) {
-                controller.sendMessage(message);
-            } else {
-                controller.sendPersonalMessage(username, message);
+        try {
+            String username = usersList.getSelectedValue();
+            String message = messageTextField.getText().trim();
+            if (!message.isEmpty()) {
+                if(username == null || username.equals("all")) {
+                    controller.sendMessage(null, message);
+                } else {
+                    controller.sendMessage(username, message);
+                }
+                appendOwnMessage(message);
+                messageTextField.setText(null);
             }
-            messageTextField.setText(null);
+        } catch (IOException e) {
+            showError("Ошибка при отправке сообщения");
         }
     }
 
@@ -54,8 +60,20 @@ public class ClientChat extends JFrame {
         });
     }
 
+    public void updateUsersList(Vector<String> users) {
+        SwingUtilities.invokeLater(() -> {
+            usersList.setListData(users);
+            usersList.updateUI();
+        });
+    }
+
     private void appendOwnMessage(String message) {
         appendMessage("Я: " + message);
+    }
+
+    public void onClose() {
+        this.dispose();
+        controller.shutdown();
     }
 
     public void showError(String message) {

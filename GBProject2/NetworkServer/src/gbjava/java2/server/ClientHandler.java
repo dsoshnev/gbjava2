@@ -1,40 +1,49 @@
 package gbjava.java2.server;
 
-import java.io.DataInputStream;
-import java.io.DataOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.net.Socket;
-import java.util.Arrays;
+import java.net.SocketTimeoutException;
+import java.util.Date;
+import java.util.Timer;
+
+import gbjava.java2.client.Command;
+import gbjava.java2.client.AuthCommand;
 
 public class ClientHandler {
 
+    private static final int AUTHENTICATION_TIMEOUT = 10000;
     private final NetworkServer networkServer;
     private final Socket clientSocket;
-    private DataInputStream in;
-    private DataOutputStream out;
+    private ObjectInputStream in;
+    private ObjectOutputStream out;
     private String nickname;
+    private Date timeStamp;
 
     public ClientHandler(NetworkServer networkServer, Socket socket) {
         this.networkServer = networkServer;
         this.clientSocket = socket;
+        timeStamp = new Date();
+        System.out.printf("Client %s connected at %s%n", clientSocket, timeStamp);
+
     }
 
     public void run() {
         doHandle(clientSocket);
     }
 
+
     private void doHandle(Socket socket) {
         try {
-            in = new DataInputStream(socket.getInputStream());
-            out = new DataOutputStream(socket.getOutputStream());
+            in = new ObjectInputStream(socket.getInputStream());
+            out = new ObjectOutputStream(socket.getOutputStream());
 
             new Thread(() -> {
                 try {
-                    authentication();
-                    readMessages();
+                    if (authentication()) readMessages();
                 } catch (IOException e) {
-                    System.out.println("Соединение с клиентом " + nickname + " было закрыто");
+                    System.err.println("Failed to establish client connection");
                 } finally {
                     closeConnection();
                 }
@@ -46,8 +55,10 @@ public class ClientHandler {
     }
 
     private void closeConnection() {
-        networkServer.unsubscribe(this);
         try {
+            sendCommand(Command.endCommand());
+            System.out.printf("Client %s disconnected %s%n", clientSocket, new Date());
+            networkServer.unsubscribe(this);
             clientSocket.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -55,56 +66,85 @@ public class ClientHandler {
     }
 
     private void readMessages() throws IOException {
-        System.out.println("Чтение сообщений...");
+        clientSocket.setSoTimeout(0);
         while (true) {
-            // "/end"
-            String message = readMessage();
-            if ("/end".equals(message)) {
-                return;
-            }
-            // "/w username message"
-            if (message.startsWith("/w")) {
-                String[] messageParts = message.split("\\s+", 3);
-                networkServer.personalMessage(messageParts[1], nickname + ": " + messageParts[2], this);
-            } else {
-                networkServer.broadcastMessage(nickname + ": " + message, this);
+            try {
+                Command command = readCommand();
+                if (command != null) {
+                    switch (command.getType()) {
+                        case END:
+                            return;
+                        case MESSAGE:
+                            networkServer.sendMessage(command, this);
+                            break;
+                    }
+                }
+            } catch(SocketTimeoutException e) {
+                //if timeout not equals 0
             }
         }
     }
 
-    private void authentication() throws IOException {
-        System.out.println("Аутентфикация...");
+    private boolean authentication() throws IOException {
+        clientSocket.setSoTimeout(AUTHENTICATION_TIMEOUT);
         while (true) {
-            String message = readMessage();
-            // "/auth login password"
-            if (message.startsWith("/auth")) {
-                String[] messageParts = message.split("\\s+", 3);
-                String username = networkServer.getAuthService().getUsernameByLoginAndPassword(messageParts[1], messageParts[2]);
-                if (username == null) {
-                    sendMessage("Отсутствует учетная запись по данному логину и паролю!");
-                } else {
-                    nickname = username;
-                    networkServer.broadcastMessage(nickname + " зашел в чат!", this);
-                    sendMessage("/auth " + nickname);
-                    networkServer.subscribe(this);
-                    break;
+            try {
+                Command command = readCommand();
+                if(command != null) {
+                    switch (command.getType()) {
+                        case END:
+                            return false;
+                        case AUTH:
+                            AuthCommand authCommand = (AuthCommand) command.getData();
+                            String username = networkServer.getAuthService().getUsernameByLoginAndPassword(authCommand.getLogin(), authCommand.getPassword());
+                            if (username != null) {
+                                nickname = username;
+                                networkServer.sendMessage(Command.messageCommand(null, nickname + " зашел в чат!"), this);
+                                authCommand.setUsername(nickname);
+                                sendCommand(command);
+                                networkServer.subscribe(this);
+                                return true;
+                            } else {
+                                sendCommand(Command.errorCommand("Отсутствует учетная запись по данному логину и паролю!"));
+                            }
+                            break;
+                    }
+                }
+            } catch (SocketTimeoutException e) {
+                if (checkAuthTimeout()) {
+                    return false;
                 }
             }
         }
     }
 
-    public String readMessage() throws IOException {
-        String message = in.readUTF();
-        System.out.printf("Получение: %s: %s%n", nickname, message);
-        return message;
+    private boolean checkAuthTimeout() {
+        long timeout = new Date().getTime() - timeStamp.getTime();
+        if(timeout >= AUTHENTICATION_TIMEOUT) {
+            return true;
+        }
+        return false;
     }
 
-    public void sendMessage(String message) throws IOException {
-        out.writeUTF(message);
-        System.out.printf("Отправка: %s: %s%n", nickname, message);
+
+    private Command readCommand() throws IOException {
+        try {
+            Command command = (Command) in.readObject();
+            System.out.printf("Read: %s: %s%n", nickname, command);
+            return command;
+        } catch (ClassNotFoundException e) {
+            sendCommand(Command.errorCommand("Unknown type of object from client!"));
+            return null;
+        }
+    }
+
+    public void sendCommand(Command command) throws IOException {
+        out.writeObject(command);
+        System.out.printf("Send: %s: %s%n", nickname, command);
     }
 
     public String getNickname() {
         return nickname;
     }
+
 }
