@@ -1,44 +1,54 @@
 package gbjava.java2.server;
 
-import java.util.List;
+import gbjava.java2.client.UserData;
+
+import java.sql.*;
+import java.util.*;
 
 public class BaseAuthService implements AuthService {
 
-    private static class UserData {
-        private String login;
-        private String password;
-        private String username;
+    private Connection conn;
 
-        public UserData(String login, String password, String username) {
-            this.login = login;
-            this.password = password;
-            this.username = username;
-        }
-    }
-
-    private static final List<UserData> USER_DATA = List.of(
-            new UserData("login1", "pass1", "username1"),
-            new UserData("login2", "pass2", "username2"),
-            new UserData("login3", "pass3", "username3")
-    );
+    private static final List<UserData> users = new ArrayList<>();
 
     @Override
-    public String getUsernameByLoginAndPassword(String login, String password) {
-        for (UserData userDatum : USER_DATA) {
-            if (userDatum.login.equals(login) && userDatum.password.equals(password)) {
-                return userDatum.username;
+    public UserData AuthorizeUser(String login, String password) {
+        for (UserData user : users) {
+            if (user.login.equals(login) && user.password.equals(password)) {
+                return user;
             }
         }
         return null;
     }
 
     @Override
-    public void start() {
+    public void setUsername(String login, String nickname) {
+        // update DB
+    }
+
+    @Override
+    public void start() throws Exception {
+
+        Class.forName("org.sqlite.JDBC");
+        conn = DriverManager.getConnection("jdbc:sqlite:MyDatabase.db");
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT * FROM users");
+        while (rs.next()) {
+            String login = rs.getString(1);
+            String password = rs.getString(2);
+            String username = rs.getString(3);
+            users.add(new UserData(login, password, username));
+        }
         System.out.println("Auth service is started");
     }
 
     @Override
     public void stop() {
+        try {
+            conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         System.out.println("Auth service is stopped");
     }
 }

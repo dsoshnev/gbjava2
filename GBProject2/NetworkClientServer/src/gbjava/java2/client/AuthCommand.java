@@ -6,12 +6,13 @@ public class AuthCommand implements Serializable {
 
     private final String login;
     private final String password;
-
     private String username;
 
-    public AuthCommand(String login, String password) {
+
+    public AuthCommand(String login, String password, String username) {
         this.login = login;
         this.password = password;
+        this.username = username;
     }
 
     public String getLogin() {

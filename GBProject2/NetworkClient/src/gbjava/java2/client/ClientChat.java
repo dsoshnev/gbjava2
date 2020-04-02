@@ -4,12 +4,14 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.List;
 import java.util.Vector;
 
 public class ClientChat extends JFrame {
 
     private JPanel mainPanel;
     private JList<String> usersList;
+    private List<UserData> usersData;
     private JTextField messageTextField;
     private JButton sendButton;
     private JTextArea chatText;
@@ -37,14 +39,14 @@ public class ClientChat extends JFrame {
 
     private void sendMessage() {
         try {
-            String username = usersList.getSelectedValue();
+            int index = usersList.getSelectedIndex();
+            if (index == -1) {
+                index = 0;
+            }
+            UserData toUser = usersData.get(index);
             String message = messageTextField.getText().trim();
             if (!message.isEmpty()) {
-                if(username == null || username.equals("all")) {
-                    controller.sendMessage(null, message);
-                } else {
-                    controller.sendMessage(username, message);
-                }
+                controller.sendMessage(toUser, message);
                 appendOwnMessage(message);
                 messageTextField.setText(null);
             }
@@ -60,9 +62,14 @@ public class ClientChat extends JFrame {
         });
     }
 
-    public void updateUsersList(Vector<String> users) {
+    public void updateUsersList(List<UserData> users) {
         SwingUtilities.invokeLater(() -> {
-            usersList.setListData(users);
+            usersData = users;
+            Vector<String> v = new Vector<>();
+            for (UserData user : users) {
+                v.add(user.username);
+            }
+            usersList.setListData(v);
             usersList.updateUI();
         });
     }

@@ -2,7 +2,7 @@ package gbjava.java2.client;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Vector;
+import java.util.List;
 import java.util.function.Consumer;
 
 public class NetworkService {
@@ -16,12 +16,12 @@ public class NetworkService {
     private ObjectOutputStream out;
 
     private Consumer<String> messageHandler;
-    private Consumer<Vector<String>> updateUsersListMessageHandler;
+    private Consumer<List<UserData>> updateUsersListMessageHandler;
     private Consumer<String> errorMessageHandler;
     private Consumer<String> authMessageHandler;
     private Consumer<String> endMessageHandler;
 
-    private String nickname;
+    //private String nickname;
 
     public NetworkService(String host, int port) {
         this.host = host;
@@ -49,7 +49,7 @@ public class NetworkService {
                             case MESSAGE:
                                 if (messageHandler != null) {
                                     MessageCommand mCommand = (MessageCommand) command.getData();
-                                    messageHandler.accept(String.format("%s: %s", mCommand.getFromUser(), mCommand.getMessage()));
+                                    messageHandler.accept(String.format("%s: %s", mCommand.getFromUser().username, mCommand.getMessage()));
                                 }
                                 break;
                             case ERROR:
@@ -73,12 +73,12 @@ public class NetworkService {
         }).start();
     }
 
-    public void sendAuthMessage(String login, String password) throws IOException {
-        sendCommand(Command.authCommand(login, password));
+    public void sendAuthMessage(String login, String password, String username) throws IOException {
+        sendCommand(Command.authCommand(login, password, username));
     }
 
-    public void sendMessage(String username, String message) throws IOException {
-        sendCommand(Command.messageCommand(username, message));
+    public void sendMessage(UserData toUser, String message) throws IOException {
+        sendCommand(Command.messageCommand(toUser, message));
     }
 
     private void sendCommand(Command command) throws IOException {
@@ -100,7 +100,7 @@ public class NetworkService {
         this.messageHandler = messageHandler;
     }
 
-    public void setUpdateUsersListMessageHandler(Consumer<Vector<String>> updateUsersListMessageHandler) {
+    public void setUpdateUsersListMessageHandler(Consumer<List<UserData>> updateUsersListMessageHandler) {
         this.updateUsersListMessageHandler = updateUsersListMessageHandler;
     }
 

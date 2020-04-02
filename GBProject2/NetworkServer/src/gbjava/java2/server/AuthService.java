@@ -1,8 +1,10 @@
 package gbjava.java2.server;
 
-public interface AuthService {
-    String getUsernameByLoginAndPassword(String login, String password);
+import gbjava.java2.client.UserData;
 
-    void start();
+public interface AuthService {
+    UserData AuthorizeUser(String login, String password);
+    void setUsername(String login, String nickname);
+    void start() throws Exception;
     void stop();
 }

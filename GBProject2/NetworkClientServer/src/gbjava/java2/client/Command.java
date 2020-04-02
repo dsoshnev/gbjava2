@@ -13,10 +13,10 @@ public class Command implements Serializable {
 
     public CommandType getType() { return type; }
 
-    public static Command authCommand(String login, String password) {
+    public static Command authCommand(String login, String password, String username) {
         Command command = new Command();
         command.type = CommandType.AUTH;
-        command.data = new AuthCommand(login, password);
+        command.data = new AuthCommand(login, password, username);
         return command;
     }
 
@@ -34,14 +34,14 @@ public class Command implements Serializable {
         return command;
     }
 
-    public static Command messageCommand(String username, String message) {
+    public static Command messageCommand(UserData toUser, String message) {
         Command command = new Command();
         command.type = CommandType.MESSAGE;
-        command.data = new MessageCommand(null, username, message);
+        command.data = new MessageCommand(null, toUser, message);
         return command;
     }
 
-    public static Command updateUsersListCommand(Vector<String> users) {
+    public static Command updateUsersListCommand(List<UserData> users) {
         Command command = new Command();
         command.type = CommandType.UPDATE_USERS_LIST;
         command.data = new UpdateUsersListCommand(users);
