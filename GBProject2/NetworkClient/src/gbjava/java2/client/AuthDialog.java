@@ -11,6 +11,7 @@ public class AuthDialog extends JFrame {
     private JButton buttonCancel;
     private JTextField loginText;
     private JPasswordField passwordText;
+    private JTextField usernameText;
 
     private ClientController controller;
 
@@ -36,9 +37,10 @@ public class AuthDialog extends JFrame {
 
     private void onOK() {
         String login = loginText.getText().trim();
-        String pass = new String(passwordText.getPassword()).trim();
+        String password = new String(passwordText.getPassword()).trim();
+        String username = usernameText.getText().trim();
         try {
-            controller.sendAuthMessage(login, pass);
+            controller.sendAuthMessage(login, password, username);
         } catch (IOException e) {
             showError("Ошибка при попытке аутентификации!");
         }

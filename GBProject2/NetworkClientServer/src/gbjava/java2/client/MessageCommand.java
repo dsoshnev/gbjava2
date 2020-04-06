@@ -3,21 +3,21 @@ package gbjava.java2.client;
 import java.io.Serializable;
 
 public class MessageCommand implements Serializable {
-    private String fromUser;
-    private final String toUser;
+    private UserData fromUser;
+    private final UserData toUser;
     private final String message;
 
-    public MessageCommand(String fromUser, String toUser, String message) {
+    public MessageCommand(UserData fromUser, UserData toUser, String message) {
         this.fromUser = fromUser;
         this.toUser = toUser;
         this.message = message;
     }
 
-    public String getFromUser() {
+    public UserData getFromUser() {
         return fromUser;
     }
 
-    public String getToUser() {
+    public UserData getToUser() {
         return toUser;
     }
 
@@ -25,7 +25,7 @@ public class MessageCommand implements Serializable {
         return message;
     }
 
-    public void setFromUser(String fromUser) {
+    public void setFromUser(UserData fromUser) {
         this.fromUser = fromUser;
     }
 

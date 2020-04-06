@@ -20,15 +20,15 @@ public class ClientController {
     }
 
     private void runAuthProcess() {
-        networkService.setAuthMessageHandler(nickname -> openChat(nickname));
-        networkService.setErrorMessageHandler(message -> authDialog.showError(message));
+        networkService.setAuthMessageHandler(title -> openChat(title));
+        networkService.setErrorMessageHandler(authDialog::showError);
         networkService.setEndMessageHandler(message -> authDialog.onClose());
         authDialog.setVisible(true);
     }
 
-    private void openChat(String nickname) {
+    private void openChat(String title) {
         authDialog.dispose();
-        clientChat.setTitle(nickname);
+        clientChat.setTitle(title);
         networkService.setMessageHandler(clientChat::appendMessage);
         networkService.setUpdateUsersListMessageHandler(clientChat::updateUsersList);
         networkService.setErrorMessageHandler(message -> clientChat.showError(message));
@@ -40,12 +40,12 @@ public class ClientController {
             networkService.connect();
     }
 
-    public void sendAuthMessage(String login, String pass) throws IOException {
-        networkService.sendAuthMessage(login, pass);
+    public void sendAuthMessage(String login, String password, String username) throws IOException {
+        networkService.sendAuthMessage(login, password, username);
     }
 
-    public void sendMessage(String username, String message) throws IOException {
-        networkService.sendMessage(username, message);
+    public void sendMessage(UserData toUser, String message) throws IOException {
+        networkService.sendMessage(toUser, message);
     }
 
     public void shutdown() {

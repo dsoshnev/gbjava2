@@ -10,15 +10,18 @@ import java.util.Timer;
 
 import gbjava.java2.client.Command;
 import gbjava.java2.client.AuthCommand;
+import gbjava.java2.client.UserData;
 
 public class ClientHandler {
 
-    private static final int AUTHENTICATION_TIMEOUT = 10000;
+    private static final int AUTHENTICATION_TIMEOUT = 120000;
     private final NetworkServer networkServer;
     private final Socket clientSocket;
     private ObjectInputStream in;
     private ObjectOutputStream out;
-    private String nickname;
+
+    private UserData userData;
+
     private Date timeStamp;
 
     public ClientHandler(NetworkServer networkServer, Socket socket) {
@@ -50,7 +53,8 @@ public class ClientHandler {
             }).start();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Failed to do Client Handler");
+            //e.printStackTrace();
         }
     }
 
@@ -96,12 +100,13 @@ public class ClientHandler {
                             return false;
                         case AUTH:
                             AuthCommand authCommand = (AuthCommand) command.getData();
-                            String username = networkServer.getAuthService().getUsernameByLoginAndPassword(authCommand.getLogin(), authCommand.getPassword());
-                            if (username != null) {
-                                nickname = username;
-                                networkServer.sendMessage(Command.messageCommand(null, nickname + " зашел в чат!"), this);
-                                authCommand.setUsername(nickname);
+                            UserData userData = networkServer.getAuthService().AuthorizeUser(authCommand.getLogin(), authCommand.getPassword());
+                            if (userData != null) {
+                                this.userData = userData;
+                                userData.username = authCommand.getUsername();
+                                networkServer.getAuthService().setUsername(userData.login, userData.username);
                                 sendCommand(command);
+                                networkServer.sendMessage(Command.messageCommand(new UserData("All"), userData.username + " зашел в чат!"), this);
                                 networkServer.subscribe(this);
                                 return true;
                             } else {
@@ -130,7 +135,7 @@ public class ClientHandler {
     private Command readCommand() throws IOException {
         try {
             Command command = (Command) in.readObject();
-            System.out.printf("Read: %s: %s%n", nickname, command);
+            System.out.printf("Read: %s: %s%n", userData, command);
             return command;
         } catch (ClassNotFoundException e) {
             sendCommand(Command.errorCommand("Unknown type of object from client!"));
@@ -140,11 +145,10 @@ public class ClientHandler {
 
     public void sendCommand(Command command) throws IOException {
         out.writeObject(command);
-        System.out.printf("Send: %s: %s%n", nickname, command);
+        System.out.printf("Send: %s: %s%n", userData, command);
     }
 
-    public String getNickname() {
-        return nickname;
+    public UserData getUserData() {
+        return userData;
     }
-
 }

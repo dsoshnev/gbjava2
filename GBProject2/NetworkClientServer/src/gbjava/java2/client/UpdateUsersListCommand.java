@@ -1,16 +1,16 @@
 package gbjava.java2.client;
 
 import java.io.Serializable;
-import java.util.Vector;
+import java.util.List;
 
 public class UpdateUsersListCommand implements Serializable {
-    private final Vector<String> users;
+    private final List<UserData> users;
 
-    public UpdateUsersListCommand(Vector<String> users) {
+    public UpdateUsersListCommand(List<UserData> users) {
         this.users = users;
     }
 
-    public Vector<String> getUsers() {
+    public List<UserData> getUsers() {
         return users;
     }
 

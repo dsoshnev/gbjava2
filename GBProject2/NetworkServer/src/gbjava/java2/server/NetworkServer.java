@@ -2,6 +2,7 @@ package gbjava.java2.server;
 
 import gbjava.java2.client.Command;
 import gbjava.java2.client.MessageCommand;
+import gbjava.java2.client.UserData;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -31,6 +32,8 @@ public class NetworkServer {
         } catch (IOException e) {
             System.err.println("Failed to establish network connection");
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         } finally {
             authService.stop();
         }
@@ -46,9 +49,12 @@ public class NetworkServer {
     }
 
     public void sendMessage(Command command, ClientHandler owner) throws IOException {
+
         MessageCommand messageCommand = (MessageCommand) command.getData();
-        messageCommand.setFromUser(owner.getNickname());
-        if(messageCommand.getToUser() == null) {
+        UserData toUser = messageCommand.getToUser();
+        UserData fromUser = owner.getUserData() ;
+        messageCommand.setFromUser(fromUser);
+        if(toUser.login.equals("All")) {
             broadcastMessage(command, owner);
         } else {
             personalMessage(command, owner);
@@ -65,18 +71,19 @@ public class NetworkServer {
 
     private synchronized void personalMessage(Command command, ClientHandler clientHandler) throws IOException {
         MessageCommand messageCommand = (MessageCommand) command.getData();
+        UserData toUser = messageCommand.getToUser();
         for (ClientHandler client : clients) {
-            if (client.getNickname().equals(messageCommand.getToUser())) {
+            if (client.getUserData().login.equals(toUser.login)) {
                 client.sendCommand(command);
             }
         }
     }
 
     private synchronized void updateUsersListMessage(ClientHandler clientHandler) throws IOException {
-        Vector<String> users = new Vector<>();
-        users.add("all");
+        List<UserData> users = new ArrayList<>();
+        users.add(new UserData("All","All", "All"));
         for (ClientHandler client : clients) {
-            users.add(client.getNickname());
+            users.add(client.getUserData());
         }
         for (ClientHandler client : clients) {
             client.sendCommand(Command.updateUsersListCommand(users));
