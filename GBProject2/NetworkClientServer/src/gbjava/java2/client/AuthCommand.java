@@ -4,39 +4,36 @@ import java.io.Serializable;
 
 public class AuthCommand implements Serializable {
 
-    private final String login;
-    private final String password;
-    private String username;
-
+    private final UserData userData;
 
     public AuthCommand(String login, String password, String username) {
-        this.login = login;
-        this.password = password;
-        this.username = username;
+        this.userData = new UserData(login, password, username);
     }
 
     public String getLogin() {
-        return login;
+        return userData.login;
     }
 
     public String getPassword() {
-        return password;
+        return userData.password;
     }
 
     public String getUsername() {
-        return username;
+        return userData.username;
+    }
+
+    public UserData getUserData() {
+        return userData;
     }
 
     public void setUsername(String username) {
-        this.username = username;
+        this.userData.username = username;
     }
 
     @Override
     public String toString() {
         return "AuthCommand{" +
-                "login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", username='" + username + '\'' +
+                "userData='" + userData + '\'' +
                 '}';
     }
 }

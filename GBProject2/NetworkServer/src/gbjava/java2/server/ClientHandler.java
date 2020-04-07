@@ -60,12 +60,12 @@ public class ClientHandler {
 
     private void closeConnection() {
         try {
-            sendCommand(Command.endCommand());
-            System.out.printf("Client %s disconnected %s%n", clientSocket, new Date());
             networkServer.unsubscribe(this);
+            sendCommand(Command.endCommand());
             clientSocket.close();
+            System.out.printf("Client %s disconnected successfully at %s%n", clientSocket, new Date());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Connection closing failed");
         }
     }
 

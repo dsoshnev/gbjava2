@@ -4,22 +4,28 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 public class ClientChat extends JFrame {
 
     private JPanel mainPanel;
+
     private JList<String> usersList;
     private List<UserData> usersData;
+
     private JTextField messageTextField;
     private JButton sendButton;
+
     private JTextArea chatText;
+    private List<String> messages;
 
     private ClientController controller;
 
     public ClientChat(ClientController controller) {
         this.controller = controller;
+        this.messages = new ArrayList<>();
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setSize(640, 480);
         setLocationRelativeTo(null);
@@ -58,8 +64,23 @@ public class ClientChat extends JFrame {
     public void appendMessage(String message) {
         SwingUtilities.invokeLater(() -> {
             chatText.append(message);
+            messages.add(message);
             chatText.append(System.lineSeparator());
         });
+    }
+
+    public void initChat(List<String> messages) {
+        //SwingUtilities.invokeLater(() -> {
+        for (String message : messages) {
+            chatText.append(message);
+            chatText.append(System.lineSeparator());
+        }
+       // });
+    }
+
+    public List<String> getMessages() {
+        //String[] lines = chatText.getText().split("\\n");
+        return messages;
     }
 
     public void updateUsersList(List<UserData> users) {
@@ -70,7 +91,9 @@ public class ClientChat extends JFrame {
                 v.add(user.username);
             }
             usersList.setListData(v);
-            usersList.updateUI();
+            if(isVisible()) {
+                usersList.updateUI();
+            }
         });
     }
 

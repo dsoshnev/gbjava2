@@ -18,7 +18,7 @@ public class NetworkService {
     private Consumer<String> messageHandler;
     private Consumer<List<UserData>> updateUsersListMessageHandler;
     private Consumer<String> errorMessageHandler;
-    private Consumer<String> authMessageHandler;
+    private Consumer<UserData> authMessageHandler;
     private Consumer<String> endMessageHandler;
 
     //private String nickname;
@@ -44,7 +44,7 @@ public class NetworkService {
                         switch (command.getType()) {
                             case AUTH:
                                 AuthCommand aCommand = (AuthCommand) command.getData();
-                                authMessageHandler.accept(aCommand.getUsername());
+                                authMessageHandler.accept(aCommand.getUserData());
                                 break;
                             case MESSAGE:
                                 if (messageHandler != null) {
@@ -108,7 +108,7 @@ public class NetworkService {
         this.errorMessageHandler = errorMessageHandler;
     }
 
-    public void setAuthMessageHandler(Consumer<String> authMessageHandler) {
+    public void setAuthMessageHandler(Consumer<UserData> authMessageHandler) {
         this.authMessageHandler = authMessageHandler;
     }
 
