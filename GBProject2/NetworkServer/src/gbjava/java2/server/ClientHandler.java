@@ -12,7 +12,7 @@ import gbjava.java2.client.Command;
 import gbjava.java2.client.AuthCommand;
 import gbjava.java2.client.UserData;
 
-public class ClientHandler {
+public class ClientHandler implements Runnable {
 
     private static final int AUTHENTICATION_TIMEOUT = 120000;
     private final NetworkServer networkServer;
@@ -32,6 +32,7 @@ public class ClientHandler {
 
     }
 
+    @Override
     public void run() {
         doHandle(clientSocket);
     }

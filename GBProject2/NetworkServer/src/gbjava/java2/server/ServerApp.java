@@ -1,10 +1,12 @@
 package gbjava.java2.server;
 
+import java.io.IOException;
+
 public class ServerApp {
 
     private static final int DEFAULT_PORT = 8189;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
         int port = getServerPort(args);
         new NetworkServer(port).start();
     }

@@ -8,19 +8,23 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.*;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class NetworkServer {
+public class NetworkServer implements AutoCloseable {
 
     private final int port;
     private final List<ClientHandler> clients = new ArrayList<>();
     private final AuthService authService;
+    private final ExecutorService executorService;
 
     public NetworkServer(int port) {
         this.port = port;
         this.authService = new BaseAuthService();
+        this.executorService = Executors.newCachedThreadPool();
     }
 
-    public void start() {
+    public void start() throws Exception {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
             System.out.printf("Server is started at %s%n", serverSocket);
             authService.start();
@@ -35,13 +39,14 @@ public class NetworkServer {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            authService.stop();
+            this.close();
         }
     }
 
     private void createClientHandler(Socket clientSocket) {
-        ClientHandler clientHandler = new ClientHandler(this, clientSocket);
-        clientHandler.run();
+        //ClientHandler clientHandler = new ClientHandler(this, clientSocket);
+        //clientHandler.run();
+        executorService.execute(new ClientHandler(this, clientSocket));
     }
 
     public AuthService getAuthService() {
@@ -98,5 +103,12 @@ public class NetworkServer {
     public synchronized void unsubscribe(ClientHandler clientHandler) throws IOException {
         clients.remove(clientHandler);
         updateUsersListMessage(clientHandler);
+    }
+
+    @Override
+    public void close() throws Exception {
+
+        executorService.shutdown();
+        authService.stop();
     }
 }
