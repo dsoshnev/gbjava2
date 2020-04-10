@@ -12,7 +12,7 @@ import gbjava.java2.client.Command;
 import gbjava.java2.client.AuthCommand;
 import gbjava.java2.client.UserData;
 
-public class ClientHandler {
+public class ClientHandler implements Runnable {
 
     private static final int AUTHENTICATION_TIMEOUT = 120000;
     private final NetworkServer networkServer;
@@ -32,6 +32,7 @@ public class ClientHandler {
 
     }
 
+    @Override
     public void run() {
         doHandle(clientSocket);
     }
@@ -60,12 +61,12 @@ public class ClientHandler {
 
     private void closeConnection() {
         try {
-            sendCommand(Command.endCommand());
-            System.out.printf("Client %s disconnected %s%n", clientSocket, new Date());
             networkServer.unsubscribe(this);
+            sendCommand(Command.endCommand());
             clientSocket.close();
+            System.out.printf("Client %s disconnected successfully at %s%n", clientSocket, new Date());
         } catch (IOException e) {
-            e.printStackTrace();
+            System.err.println("Connection closing failed");
         }
     }
 

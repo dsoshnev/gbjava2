@@ -4,16 +4,20 @@ import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Vector;
 
 public class ClientChat extends JFrame {
 
     private JPanel mainPanel;
+
     private JList<String> usersList;
     private List<UserData> usersData;
+
     private JTextField messageTextField;
     private JButton sendButton;
+
     private JTextArea chatText;
 
     private ClientController controller;
@@ -47,7 +51,6 @@ public class ClientChat extends JFrame {
             String message = messageTextField.getText().trim();
             if (!message.isEmpty()) {
                 controller.sendMessage(toUser, message);
-                appendOwnMessage(message);
                 messageTextField.setText(null);
             }
         } catch (IOException e) {
@@ -62,6 +65,15 @@ public class ClientChat extends JFrame {
         });
     }
 
+    public void initChat(List<String> messages) {
+        //SwingUtilities.invokeLater(() -> {
+        for (String message : messages) {
+            chatText.append(message);
+            chatText.append(System.lineSeparator());
+        }
+       // });
+    }
+
     public void updateUsersList(List<UserData> users) {
         SwingUtilities.invokeLater(() -> {
             usersData = users;
@@ -70,12 +82,10 @@ public class ClientChat extends JFrame {
                 v.add(user.username);
             }
             usersList.setListData(v);
-            usersList.updateUI();
+            if(isVisible()) {
+                usersList.updateUI();
+            }
         });
-    }
-
-    private void appendOwnMessage(String message) {
-        appendMessage("Я: " + message);
     }
 
     public void onClose() {
