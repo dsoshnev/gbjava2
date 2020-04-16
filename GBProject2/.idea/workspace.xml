@@ -2,18 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9b259c04-2365-4987-9943-7c691ddde02a" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/gbjava3/src/lesson35/App35.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gbjava3/src/lesson35/Car.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gbjava3/src/lesson35/Race.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gbjava3/src/lesson35/Road.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gbjava3/src/lesson35/Stage.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/gbjava3/src/lesson35/Tunnel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/NetworkServer/src/gbjava/java2/server/LogService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gbjava3/src/lesson36/App36.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/gbjava3/src/lesson36/App36Test.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/log.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NetworkServer/src/gbjava/java2/server/BaseAuthService.java" beforeDir="false" afterPath="$PROJECT_DIR$/NetworkServer/src/gbjava/java2/server/BaseAuthService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NetworkServer/src/gbjava/java2/server/ClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/NetworkServer/src/gbjava/java2/server/ClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NetworkServer/src/gbjava/java2/server/NetworkServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/NetworkServer/src/gbjava/java2/server/NetworkServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/NetworkServer/src/gbjava/java2/server/ServerApp.java" beforeDir="false" afterPath="$PROJECT_DIR$/NetworkServer/src/gbjava/java2/server/ServerApp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gbjava3/gbjava3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/gbjava3/gbjava3.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeInsightWorkspaceSettings">
+    <option name="optimizeImportsOnTheFly" value="true" />
   </component>
   <component name="FavoritesManager">
     <favorites_list name="GBProject2" />
@@ -23,13 +29,14 @@
       <list>
         <option value="Enum" />
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="lesson34" />
+        <entry key="$PROJECT_DIR$/.." value="lesson35" />
       </map>
     </option>
     <option name="RECENT_COMMON_BRANCH" value="master" />
@@ -45,35 +52,54 @@
     </option>
   </component>
   <component name="ProjectId" id="1ZlE929VdPXhhzUsINmT75VTJYU" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="lesson36" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App35">
-    <configuration name="App34" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="lesson34.App34" />
+  <component name="RunManager" selected="JUnit.App36Test">
+    <configuration name="App36Test" type="AndroidJUnit" factoryName="Android JUnit" temporary="true" nameIsGenerated="true">
       <module name="gbjava3" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="lesson34.*" />
+          <option name="PATTERN" value="lesson36.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <option name="PACKAGE_NAME" value="lesson36" />
+      <option name="MAIN_CLASS_NAME" value="lesson36.App36Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -91,12 +117,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="ClientApp" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="gbjava.java2.client.ClientApp" />
-      <module name="NetworkClient" />
+    <configuration name="App36" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="lesson36.App36" />
+      <module name="gbjava3" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="gbjava.java2.client.*" />
+          <option name="PATTERN" value="lesson36.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -117,18 +143,35 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="App36Test" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="gbjava3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="lesson36.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="PACKAGE_NAME" value="lesson36" />
+      <option name="MAIN_CLASS_NAME" value="lesson36.App36Test" />
+      <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
-      <item itemvalue="Application.ClientApp" />
       <item itemvalue="Application.ServerApp" />
-      <item itemvalue="Application.App34" />
       <item itemvalue="Application.App35" />
+      <item itemvalue="Application.App36" />
+      <item itemvalue="Android JUnit.App36Test" />
+      <item itemvalue="JUnit.App36Test" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.App35" />
-        <item itemvalue="Application.ClientApp" />
+        <item itemvalue="JUnit.App36Test" />
+        <item itemvalue="Android JUnit.App36Test" />
+        <item itemvalue="Application.App36" />
         <item itemvalue="Application.ServerApp" />
-        <item itemvalue="Application.App34" />
+        <item itemvalue="Application.App35" />
       </list>
     </recent_temporary>
   </component>
@@ -206,10 +249,18 @@
       <option name="project" value="LOCAL" />
       <updated>1586446409860</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Выполнил задание java3.5">
+      <created>1586545912440</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1586545912440</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <ignored-roots>
       <path value="$USER_HOME$/IdeaProjects/gbjava2" />
     </ignored-roots>
@@ -220,26 +271,31 @@
     <MESSAGE value="Выполнил задание java3.3 (1,2 и 3)" />
     <MESSAGE value="Выполнил задание java3.4 (1)" />
     <MESSAGE value="Выполнил задание java3.4 (2)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Выполнил задание java3.4 (2)" />
+    <MESSAGE value="Выполнил задание java3.5" />
+    <option name="LAST_COMMIT_MESSAGE" value="Выполнил задание java3.5" />
   </component>
   <component name="WindowStateProjectService">
     <state x="265" y="27" key="#Code_Folding" timestamp="1585503275996">
       <screen x="0" y="23" width="1366" height="681" />
     </state>
     <state x="265" y="27" key="#Code_Folding/0.23.1366.681@0.23.1366.681" timestamp="1585503275996" />
-    <state x="296" y="23" key="#Project_Structure" timestamp="1585841996728">
+    <state x="296" y="23" key="#Project_Structure" timestamp="1586975256459">
       <screen x="0" y="23" width="1366" height="683" />
     </state>
-    <state x="296" y="23" key="#Project_Structure/0.23.1366.683@0.23.1366.683" timestamp="1585841996728" />
+    <state x="296" y="23" key="#Project_Structure/0.23.1366.683@0.23.1366.683" timestamp="1586975256459" />
     <state x="129" y="23" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1585495084412">
       <screen x="0" y="23" width="1366" height="677" />
     </state>
     <state x="129" y="23" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1366.677@0.23.1366.677" timestamp="1585495084412" />
-    <state x="424" y="69" key="#com.intellij.ide.util.MemberChooser" timestamp="1586447302662">
+    <state x="433" y="159" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586882708514">
       <screen x="0" y="23" width="1366" height="685" />
     </state>
+    <state x="433" y="159" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1366.685@0.23.1366.685" timestamp="1586882708514" />
+    <state x="424" y="69" key="#com.intellij.ide.util.MemberChooser" timestamp="1586881519404">
+      <screen x="0" y="23" width="1366" height="681" />
+    </state>
     <state x="424" y="69" key="#com.intellij.ide.util.MemberChooser/0.23.1366.677@0.23.1366.677" timestamp="1585419853773" />
-    <state x="424" y="69" key="#com.intellij.ide.util.MemberChooser/0.23.1366.681@0.23.1366.681" timestamp="1585576797647" />
+    <state x="424" y="69" key="#com.intellij.ide.util.MemberChooser/0.23.1366.681@0.23.1366.681" timestamp="1586881519404" />
     <state x="424" y="69" key="#com.intellij.ide.util.MemberChooser/0.23.1366.685@0.23.1366.685" timestamp="1586447302662" />
     <state x="424" y="69" key="#com.intellij.ide.util.MemberChooser/0.23.1366.689@0.23.1366.689" timestamp="1586440703860" />
     <state x="416" y="39" key="#com.intellij.refactoring.encapsulateFields.EncalpsulateFieldsDialog" timestamp="1586437294329">
@@ -250,11 +306,12 @@
       <screen x="0" y="23" width="1366" height="683" />
     </state>
     <state x="434" y="130" key="#com.intellij.util.ui.classpath.ChooseLibrariesDialog/0.23.1366.683@0.23.1366.683" timestamp="1585841980488" />
-    <state x="328" y="23" width="759" height="685" key="CommitChangelistDialog2" timestamp="1586446409445">
-      <screen x="0" y="23" width="1366" height="689" />
+    <state x="328" y="23" width="1000" height="683" key="CommitChangelistDialog2" timestamp="1586545912018">
+      <screen x="0" y="23" width="1366" height="683" />
     </state>
     <state x="328" y="23" key="CommitChangelistDialog2/0.23.1366.677@0.23.1366.677" timestamp="1585409063710" />
     <state x="328" y="23" key="CommitChangelistDialog2/0.23.1366.681@0.23.1366.681" timestamp="1585585721687" />
+    <state x="328" y="23" width="1000" height="683" key="CommitChangelistDialog2/0.23.1366.683@0.23.1366.683" timestamp="1586545912018" />
     <state x="328" y="23" width="759" height="685" key="CommitChangelistDialog2/0.23.1366.685@0.23.1366.685" timestamp="1586440008371" />
     <state x="328" y="23" key="CommitChangelistDialog2/0.23.1366.689@0.23.1366.689" timestamp="1586446409445" />
     <state x="554" y="262" key="Github.ShareDialog" timestamp="1585405212338">
@@ -265,48 +322,48 @@
       <screen x="0" y="23" width="1366" height="677" />
     </state>
     <state x="590" y="75" key="Github.UntrackedFilesDialog/0.23.1366.677@0.23.1366.677" timestamp="1585405218619" />
-    <state width="1200" height="72" key="GridCell.Tab.0.bottom" timestamp="1586545642077">
-      <screen x="0" y="23" width="1366" height="685" />
+    <state width="1200" height="2" key="GridCell.Tab.0.bottom" timestamp="1587041730349">
+      <screen x="0" y="23" width="1366" height="683" />
     </state>
     <state width="1200" height="281" key="GridCell.Tab.0.bottom/0.23.1366.677@0.23.1366.677" timestamp="1585573742101" />
-    <state width="1200" height="352" key="GridCell.Tab.0.bottom/0.23.1366.679@0.23.1366.679" timestamp="1585574207023" />
-    <state width="1200" height="137" key="GridCell.Tab.0.bottom/0.23.1366.681@0.23.1366.681" timestamp="1585585652453" />
-    <state width="1200" height="159" key="GridCell.Tab.0.bottom/0.23.1366.683@0.23.1366.683" timestamp="1586187093867" />
-    <state width="1200" height="72" key="GridCell.Tab.0.bottom/0.23.1366.685@0.23.1366.685" timestamp="1586545642077" />
-    <state width="1200" height="354" key="GridCell.Tab.0.bottom/0.23.1366.689@0.23.1366.689" timestamp="1586541408415" />
+    <state width="1200" height="72" key="GridCell.Tab.0.bottom/0.23.1366.679@0.23.1366.679" timestamp="1586695292472" />
+    <state width="1200" height="195" key="GridCell.Tab.0.bottom/0.23.1366.681@0.23.1366.681" timestamp="1586881944714" />
+    <state width="1200" height="2" key="GridCell.Tab.0.bottom/0.23.1366.683@0.23.1366.683" timestamp="1587041730349" />
+    <state width="1200" height="182" key="GridCell.Tab.0.bottom/0.23.1366.685@0.23.1366.685" timestamp="1587041503264" />
+    <state width="1200" height="100" key="GridCell.Tab.0.bottom/0.23.1366.689@0.23.1366.689" timestamp="1586973646550" />
     <state width="1200" height="284" key="GridCell.Tab.0.bottom/0.23.1366.691@0.23.1366.691" timestamp="1586446351666" />
     <state width="1200" height="123" key="GridCell.Tab.0.bottom/0.23.1366.692@0.23.1366.692" timestamp="1586194034558" />
-    <state width="1200" height="72" key="GridCell.Tab.0.center" timestamp="1586545642076">
-      <screen x="0" y="23" width="1366" height="685" />
+    <state width="1200" height="2" key="GridCell.Tab.0.center" timestamp="1587041730348">
+      <screen x="0" y="23" width="1366" height="683" />
     </state>
     <state width="1200" height="281" key="GridCell.Tab.0.center/0.23.1366.677@0.23.1366.677" timestamp="1585573742099" />
-    <state width="1200" height="352" key="GridCell.Tab.0.center/0.23.1366.679@0.23.1366.679" timestamp="1585574207022" />
-    <state width="1200" height="137" key="GridCell.Tab.0.center/0.23.1366.681@0.23.1366.681" timestamp="1585585652451" />
-    <state width="1200" height="159" key="GridCell.Tab.0.center/0.23.1366.683@0.23.1366.683" timestamp="1586187093864" />
-    <state width="1200" height="72" key="GridCell.Tab.0.center/0.23.1366.685@0.23.1366.685" timestamp="1586545642076" />
-    <state width="1200" height="354" key="GridCell.Tab.0.center/0.23.1366.689@0.23.1366.689" timestamp="1586541408413" />
+    <state width="1200" height="72" key="GridCell.Tab.0.center/0.23.1366.679@0.23.1366.679" timestamp="1586695292471" />
+    <state width="1200" height="195" key="GridCell.Tab.0.center/0.23.1366.681@0.23.1366.681" timestamp="1586881944711" />
+    <state width="1200" height="2" key="GridCell.Tab.0.center/0.23.1366.683@0.23.1366.683" timestamp="1587041730348" />
+    <state width="1200" height="182" key="GridCell.Tab.0.center/0.23.1366.685@0.23.1366.685" timestamp="1587041503263" />
+    <state width="1200" height="100" key="GridCell.Tab.0.center/0.23.1366.689@0.23.1366.689" timestamp="1586973646549" />
     <state width="1200" height="284" key="GridCell.Tab.0.center/0.23.1366.691@0.23.1366.691" timestamp="1586446351665" />
     <state width="1200" height="123" key="GridCell.Tab.0.center/0.23.1366.692@0.23.1366.692" timestamp="1586194034557" />
-    <state width="1200" height="72" key="GridCell.Tab.0.left" timestamp="1586545642075">
-      <screen x="0" y="23" width="1366" height="685" />
+    <state width="1200" height="2" key="GridCell.Tab.0.left" timestamp="1587041730347">
+      <screen x="0" y="23" width="1366" height="683" />
     </state>
     <state width="1200" height="281" key="GridCell.Tab.0.left/0.23.1366.677@0.23.1366.677" timestamp="1585573742099" />
-    <state width="1200" height="352" key="GridCell.Tab.0.left/0.23.1366.679@0.23.1366.679" timestamp="1585574207021" />
-    <state width="1200" height="137" key="GridCell.Tab.0.left/0.23.1366.681@0.23.1366.681" timestamp="1585585652451" />
-    <state width="1200" height="159" key="GridCell.Tab.0.left/0.23.1366.683@0.23.1366.683" timestamp="1586187093863" />
-    <state width="1200" height="72" key="GridCell.Tab.0.left/0.23.1366.685@0.23.1366.685" timestamp="1586545642075" />
-    <state width="1200" height="354" key="GridCell.Tab.0.left/0.23.1366.689@0.23.1366.689" timestamp="1586541408412" />
+    <state width="1200" height="72" key="GridCell.Tab.0.left/0.23.1366.679@0.23.1366.679" timestamp="1586695292470" />
+    <state width="1200" height="195" key="GridCell.Tab.0.left/0.23.1366.681@0.23.1366.681" timestamp="1586881944701" />
+    <state width="1200" height="2" key="GridCell.Tab.0.left/0.23.1366.683@0.23.1366.683" timestamp="1587041730347" />
+    <state width="1200" height="182" key="GridCell.Tab.0.left/0.23.1366.685@0.23.1366.685" timestamp="1587041503263" />
+    <state width="1200" height="100" key="GridCell.Tab.0.left/0.23.1366.689@0.23.1366.689" timestamp="1586973646548" />
     <state width="1200" height="284" key="GridCell.Tab.0.left/0.23.1366.691@0.23.1366.691" timestamp="1586446351664" />
     <state width="1200" height="123" key="GridCell.Tab.0.left/0.23.1366.692@0.23.1366.692" timestamp="1586194034557" />
-    <state width="1200" height="72" key="GridCell.Tab.0.right" timestamp="1586545642076">
-      <screen x="0" y="23" width="1366" height="685" />
+    <state width="1200" height="2" key="GridCell.Tab.0.right" timestamp="1587041730349">
+      <screen x="0" y="23" width="1366" height="683" />
     </state>
     <state width="1200" height="281" key="GridCell.Tab.0.right/0.23.1366.677@0.23.1366.677" timestamp="1585573742100" />
-    <state width="1200" height="352" key="GridCell.Tab.0.right/0.23.1366.679@0.23.1366.679" timestamp="1585574207023" />
-    <state width="1200" height="137" key="GridCell.Tab.0.right/0.23.1366.681@0.23.1366.681" timestamp="1585585652452" />
-    <state width="1200" height="159" key="GridCell.Tab.0.right/0.23.1366.683@0.23.1366.683" timestamp="1586187093866" />
-    <state width="1200" height="72" key="GridCell.Tab.0.right/0.23.1366.685@0.23.1366.685" timestamp="1586545642076" />
-    <state width="1200" height="354" key="GridCell.Tab.0.right/0.23.1366.689@0.23.1366.689" timestamp="1586541408414" />
+    <state width="1200" height="72" key="GridCell.Tab.0.right/0.23.1366.679@0.23.1366.679" timestamp="1586695292472" />
+    <state width="1200" height="195" key="GridCell.Tab.0.right/0.23.1366.681@0.23.1366.681" timestamp="1586881944714" />
+    <state width="1200" height="2" key="GridCell.Tab.0.right/0.23.1366.683@0.23.1366.683" timestamp="1587041730349" />
+    <state width="1200" height="182" key="GridCell.Tab.0.right/0.23.1366.685@0.23.1366.685" timestamp="1587041503264" />
+    <state width="1200" height="100" key="GridCell.Tab.0.right/0.23.1366.689@0.23.1366.689" timestamp="1586973646550" />
     <state width="1200" height="284" key="GridCell.Tab.0.right/0.23.1366.691@0.23.1366.691" timestamp="1586446351665" />
     <state width="1200" height="123" key="GridCell.Tab.0.right/0.23.1366.692@0.23.1366.692" timestamp="1586194034558" />
     <state width="1200" height="167" key="GridCell.Tab.1.bottom" timestamp="1585865994080">
@@ -333,23 +390,37 @@
       <screen x="0" y="23" width="1366" height="679" />
     </state>
     <state x="545" y="162" key="UIDesigner.ListEditorDialog/0.23.1366.679@0.23.1366.679" timestamp="1585500136756" />
-    <state x="283" y="102" key="Vcs.Push.Dialog.v2" timestamp="1586446412811">
-      <screen x="0" y="23" width="1366" height="689" />
+    <state x="283" y="101" key="Vcs.Push.Dialog.v2" timestamp="1586545914755">
+      <screen x="0" y="23" width="1366" height="683" />
     </state>
     <state x="283" y="101" key="Vcs.Push.Dialog.v2/0.23.1366.677@0.23.1366.677" timestamp="1585405977772" />
     <state x="283" y="101" key="Vcs.Push.Dialog.v2/0.23.1366.679@0.23.1366.679" timestamp="1585585816220" />
     <state x="283" y="101" key="Vcs.Push.Dialog.v2/0.23.1366.681@0.23.1366.681" timestamp="1585585745370" />
+    <state x="283" y="101" key="Vcs.Push.Dialog.v2/0.23.1366.683@0.23.1366.683" timestamp="1586545914755" />
     <state x="283" y="102" key="Vcs.Push.Dialog.v2/0.23.1366.685@0.23.1366.685" timestamp="1586440013374" />
     <state x="283" y="102" key="Vcs.Push.Dialog.v2/0.23.1366.689@0.23.1366.689" timestamp="1586446412811" />
-    <state x="376" y="196" key="com.intellij.ide.util.TipDialog" timestamp="1585866102156">
-      <screen x="0" y="23" width="1366" height="685" />
+    <state x="376" y="195" key="com.intellij.ide.util.TipDialog" timestamp="1586881499006">
+      <screen x="0" y="23" width="1366" height="681" />
     </state>
     <state x="376" y="194" key="com.intellij.ide.util.TipDialog/0.23.1366.677@0.23.1366.677" timestamp="1585837494163" />
+    <state x="376" y="195" key="com.intellij.ide.util.TipDialog/0.23.1366.681@0.23.1366.681" timestamp="1586881499006" />
     <state x="376" y="196" key="com.intellij.ide.util.TipDialog/0.23.1366.685@0.23.1366.685" timestamp="1585866102156" />
+    <state x="431" y="250" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1586974626880">
+      <screen x="0" y="23" width="1366" height="683" />
+    </state>
+    <state x="431" y="250" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.23.1366.683@0.23.1366.683" timestamp="1586974626880" />
+    <state x="362" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1586887173982">
+      <screen x="0" y="23" width="1366" height="683" />
+    </state>
+    <state x="362" y="23" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.23.1366.683@0.23.1366.683" timestamp="1586887173982" />
     <state x="488" y="285" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1585405379566">
       <screen x="0" y="23" width="1366" height="677" />
     </state>
     <state x="488" y="285" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.23.1366.677@0.23.1366.677" timestamp="1585405379566" />
+    <state x="483" y="83" key="com.intellij.testIntegration.createTest.CreateTestDialog" timestamp="1586974637322">
+      <screen x="0" y="23" width="1366" height="683" />
+    </state>
+    <state x="483" y="83" key="com.intellij.testIntegration.createTest.CreateTestDialog/0.23.1366.683@0.23.1366.683" timestamp="1586974637322" />
     <state x="403" y="122" key="extract.method.dialog" timestamp="1585575431733">
       <screen x="0" y="23" width="1366" height="681" />
     </state>

@@ -26,15 +26,18 @@ public class NetworkServer implements AutoCloseable {
 
     public void start() throws Exception {
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            System.out.printf("Server is started at %s%n", serverSocket);
+            //System.out.printf("Server is started at %s%n", serverSocket);
+            LogService.info("Server is started at %s", serverSocket);
             authService.start();
             while (true) {
-                System.out.println("Waiting client connection...");
+                //System.out.println("Waiting client connection...");
+                LogService.info("Waiting client connection...");
                 Socket clientSocket = serverSocket.accept();
                 createClientHandler(clientSocket);
             }
         } catch (IOException e) {
-            System.err.println("Failed to establish network connection");
+            //System.err.println("Failed to establish network connection");
+            LogService.error("Failed to establish network connection");
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();

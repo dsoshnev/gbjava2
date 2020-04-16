@@ -39,7 +39,8 @@ public class BaseAuthService implements AuthService {
             String username = rs.getString(3);
             users.add(new UserData(login, password, username));
         }
-        System.out.println("Auth service is started");
+        //System.out.println("Auth service is started");
+        LogService.info("Auth service is started");
     }
 
     @Override
@@ -49,6 +50,7 @@ public class BaseAuthService implements AuthService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        System.out.println("Auth service is stopped");
+        //System.out.println("Auth service is stopped");
+        LogService.info("Auth service is stopped");
     }
 }
