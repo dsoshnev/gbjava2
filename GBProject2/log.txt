@@ -1,0 +1,3 @@
+Tue Apr 14 21:31:59 MSK 2020: Server is started at ServerSocket[addr=0.0.0.0/0.0.0.0,localport=8189]
+Tue Apr 14 21:32:00 MSK 2020: Auth service is started
+Tue Apr 14 21:32:00 MSK 2020: Waiting client connection...

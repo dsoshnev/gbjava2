@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
 import java.util.Date;
-import java.util.Timer;
 
 import gbjava.java2.client.Command;
 import gbjava.java2.client.AuthCommand;
@@ -28,7 +27,8 @@ public class ClientHandler implements Runnable {
         this.networkServer = networkServer;
         this.clientSocket = socket;
         timeStamp = new Date();
-        System.out.printf("Client %s connected at %s%n", clientSocket, timeStamp);
+        //System.out.printf("Client %s connected at %s%n", clientSocket, timeStamp);
+        LogService.info("Client %s connected at %s", clientSocket, timeStamp);
 
     }
 
@@ -136,7 +136,8 @@ public class ClientHandler implements Runnable {
     private Command readCommand() throws IOException {
         try {
             Command command = (Command) in.readObject();
-            System.out.printf("Read: %s: %s%n", userData, command);
+            //System.out.printf("Read: %s: %s%n", userData, command);
+            LogService.info("Read: %s: %s", userData, command);
             return command;
         } catch (ClassNotFoundException e) {
             sendCommand(Command.errorCommand("Unknown type of object from client!"));
@@ -146,7 +147,8 @@ public class ClientHandler implements Runnable {
 
     public void sendCommand(Command command) throws IOException {
         out.writeObject(command);
-        System.out.printf("Send: %s: %s%n", userData, command);
+        //System.out.printf("Send: %s: %s%n", userData, command);
+        LogService.info("Send: %s: %s", userData, command);
     }
 
     public UserData getUserData() {

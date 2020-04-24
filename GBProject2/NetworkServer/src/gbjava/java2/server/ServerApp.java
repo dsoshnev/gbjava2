@@ -1,7 +1,5 @@
 package gbjava.java2.server;
 
-import java.io.IOException;
-
 public class ServerApp {
 
     private static final int DEFAULT_PORT = 8189;
@@ -17,7 +15,8 @@ public class ServerApp {
             try {
                 port = Integer.parseInt(args[0]);
             } catch (NumberFormatException e) {
-                System.err.println("Ошибка: Некорректный формат порта, будет использоваться порт по умолчанию");
+                //System.err.println("Ошибка: Некорректный формат порта, будет использоваться порт по умолчанию");
+                LogService.error("Некорректный формат порта, будет использоваться порт по умолчанию");
             }
         }
         return port;
